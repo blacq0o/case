@@ -36,7 +36,7 @@
                                 <tr>
                                     <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$taskLevel}}</td>
-                                    <td>Total Hours Level: {{$hours.' - 1xlik süresi: '.($hours*$taskLevel)}}</td>
+                                    <td>{{$taskLevel.' levellik '.$hours.' saat - 1xlik süresi: '.($hours*$taskLevel)}}</td>
                                 </tr>
                             @endforeach
                             <tr>
@@ -44,7 +44,7 @@
                                 <td>{{$allTotal}}</td>
                             </tr>
                             <tr>
-                                <td>Toplam Bitirilecek Hafta</td>
+                                <td>İşlerin Toplam Kaç Haftada Biteceği</td>
                                 <td>{{round($allTotal/$totalDevWeekHours,2)}}</td>
                             </tr>
                             <tr>
@@ -54,7 +54,7 @@
                             @foreach($developers as $dev => $level)
                                 <tr>
                                     <td>{{$dev}}</td>
-                                    <td>1x'lik Toplam: {{($level*(round($allTotal/$totalDevWeekHours,2)*$weekHours))}} İş</td>
+                                    <td>1x'lik Toplam: {{ ($level * (round($allTotal/$totalDevWeekHours,2) * $weekHours)) }} İş</td>
                                 </tr>
                             @endforeach
                             </tbody>

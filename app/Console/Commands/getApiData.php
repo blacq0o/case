@@ -43,22 +43,26 @@ class getApiData extends Command
         try {
             $apis = Api::all();
 
+            $taskRepo = new TaskRepository();
             $client = new Client();
+
             foreach ($apis as $api){
                 $response = $client->get($api->api_url);
                 if($response->getStatusCode() == "200"){
                     if($response->getBody()){
-                        $taskRepo = new TaskRepository();
                         $bodyData = json_decode($response->getBody());
                         $result = $taskRepo->setApiData($bodyData,$api->api_type);
                         if(!$result){
                             $this->line("Hata Kayıt Başarısız") ;
                         }
+                    }else{
+                        $this->line("Servis içerisinde Body Bulunamadı") ;
                     }
                 }else{
                     $this->line("Servise Bağlantısı Başarısız: ".$response->getStatusCode()) ;
                 }
             }
+            $this->line("Kayıt İşlemi Başarılı") ;
         }catch (\Exception $e){
             Log::critical('Hata',[
                 'error_code' => $e->getCode(),

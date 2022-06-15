@@ -55,4 +55,8 @@ class TaskRepository implements TaskRepositoryInterface
             return false;
         }
     }
+    public function allTaskGroupBy($groupBy)
+    {
+        return Task::all()->groupBy($groupBy)->sortKeys();
+    }
 }
